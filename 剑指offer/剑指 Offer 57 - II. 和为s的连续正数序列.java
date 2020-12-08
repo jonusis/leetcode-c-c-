@@ -20,3 +20,27 @@
 
 1 <= target <= 10^5
  */
+class Solution {
+    public int[][] findContinuousSequence(int target) {
+        ArrayList<int []> list = new ArrayList<>();
+        int index = 1,value = 1,tail = 1;
+        while(index <= target / 2){
+            if(target > value){
+                tail++;
+                value+= tail;
+            }else if(target < value){
+                value -= index;
+                index++;
+            }else{
+                int arr[] = new int [tail - index + 1];
+                for(int i = index;i <= tail;i++){
+                    arr[i - index] = i;
+                }
+                list.add(arr);
+                value -= index;
+                index++;
+            }
+        }
+            return list.toArray(new int[list.size()][]);
+    }
+}
