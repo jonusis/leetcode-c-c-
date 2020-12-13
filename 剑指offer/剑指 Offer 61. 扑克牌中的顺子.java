@@ -10,5 +10,26 @@
 示例 2
 输入: [0,0,1,2,5]
 输出: True
-
  */
+class Solution {
+    public boolean isStraight(int[] nums) {
+        int wang = 0,now = 0;
+        Arrays.sort(nums);
+        for(int i = 0;i < nums.length;i++){
+            if(nums[i] == 0){
+                wang++;
+            }else{
+                if(now == 0){
+                    now = nums[i];
+                }else{
+                    int x = nums[i] - now;
+                    if(x == 2) wang--;
+                    if(x == 3) wang -= 2;
+                    if(wang < 0 || x == 0 || x > 3) return false;
+                    now = nums[i];
+                }
+            }
+        }
+        return true;
+    }
+}
